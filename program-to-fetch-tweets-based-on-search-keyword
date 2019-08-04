@@ -1,0 +1,15 @@
+import json
+import requests
+from requests_oauthlib import OAuth1
+
+api_key = 'r84tfRQsecYZO7XIvfJFlR8Fn' # enter api key
+api_secret_key = 'zCTENpUJXqzB8eG3gQcySKd2g6CsG3CPn0bRMFwvBdJyJIk8qK' # enter api secret key
+auth = OAuth1(api_key, api_secret_key) #authenticating the keys
+
+keyword = 'python' # search keyword
+url = "https://api.twitter.com/1.1/search/tweets.json?q="+keyword+"&count=200&tweet_mode=extended&lang=en&result_type=popular"
+ans = requests.get(url, auth=auth)
+jtweet = json.loads(ans.text)
+
+for x in jtweet['statuses']:
+  	print(x['full_text'])	
